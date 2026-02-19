@@ -1,0 +1,37 @@
+{
+  "groups": [
+    {
+      "name": "keycloak",
+      "type": "com.example.tokencache.config.KeycloakTenantsProperties",
+      "sourceType": "com.example.tokencache.config.KeycloakTenantsProperties"
+    },
+    {
+      "name": "token.cache",
+      "type": "com.example.tokencache.config.TokenCacheProperties",
+      "sourceType": "com.example.tokencache.config.TokenCacheProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "keycloak.scope",
+      "type": "java.lang.String",
+      "sourceType": "com.example.tokencache.config.KeycloakTenantsProperties"
+    },
+    {
+      "name": "keycloak.tenants",
+      "type": "java.util.Map<java.lang.String,com.example.tokencache.config.KeycloakTenantsProperties$TenantConfig>",
+      "sourceType": "com.example.tokencache.config.KeycloakTenantsProperties"
+    },
+    {
+      "name": "token.cache.max-size",
+      "type": "java.lang.Long",
+      "sourceType": "com.example.tokencache.config.TokenCacheProperties"
+    },
+    {
+      "name": "token.cache.skew-seconds",
+      "type": "java.lang.Long",
+      "sourceType": "com.example.tokencache.config.TokenCacheProperties"
+    }
+  ],
+  "hints": []
+}

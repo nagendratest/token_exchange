@@ -1,0 +1,14 @@
+server:
+  port: 8081
+
+token:
+  cache:
+    skew-seconds: 30
+    max-size: 1000
+
+keycloak:
+  scope: ""
+  tenants:
+    ECM:
+      token-url: http://keycloak:8080/realms/demo/protocol/openid-connect/token
+      scope: ""
