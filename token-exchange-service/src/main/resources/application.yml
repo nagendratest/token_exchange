@@ -1,0 +1,18 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: token-exchange-service
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+
+auth:
+  cache:
+    max-size: 1000
+    eorchestrator-ttl-seconds: 1800
+    enm-ttl-seconds: 1800

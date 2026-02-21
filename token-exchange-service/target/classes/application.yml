@@ -1,0 +1,20 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: token-exchange-service
+
+eorchestrator:
+  base-url: https://localhost:443
+  token-path: /ecm_service/tokens
+
+enm:
+  base-url: https://localhost:443
+  login-path: /login
+
+auth:
+  cache:
+    max-size: 1000
+    eorchestrator-ttl-seconds: 300
+    enm-ttl-seconds: 300

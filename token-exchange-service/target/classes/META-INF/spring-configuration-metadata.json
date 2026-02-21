@@ -1,0 +1,60 @@
+{
+  "groups": [
+    {
+      "name": "auth.cache",
+      "type": "com.example.tokencache.config.AuthCacheProperties",
+      "sourceType": "com.example.tokencache.config.AuthCacheProperties"
+    },
+    {
+      "name": "enm",
+      "type": "com.example.tokencache.config.EnmProperties",
+      "sourceType": "com.example.tokencache.config.EnmProperties"
+    },
+    {
+      "name": "eorchestrator",
+      "type": "com.example.tokencache.config.EOrchestratorProperties",
+      "sourceType": "com.example.tokencache.config.EOrchestratorProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "auth.cache.enm-ttl-seconds",
+      "type": "java.lang.Long",
+      "sourceType": "com.example.tokencache.config.AuthCacheProperties",
+      "defaultValue": 300
+    },
+    {
+      "name": "auth.cache.eorchestrator-ttl-seconds",
+      "type": "java.lang.Long",
+      "sourceType": "com.example.tokencache.config.AuthCacheProperties",
+      "defaultValue": 300
+    },
+    {
+      "name": "auth.cache.max-size",
+      "type": "java.lang.Long",
+      "sourceType": "com.example.tokencache.config.AuthCacheProperties",
+      "defaultValue": 1000
+    },
+    {
+      "name": "enm.base-url",
+      "type": "java.lang.String",
+      "sourceType": "com.example.tokencache.config.EnmProperties"
+    },
+    {
+      "name": "enm.login-path",
+      "type": "java.lang.String",
+      "sourceType": "com.example.tokencache.config.EnmProperties"
+    },
+    {
+      "name": "eorchestrator.base-url",
+      "type": "java.lang.String",
+      "sourceType": "com.example.tokencache.config.EOrchestratorProperties"
+    },
+    {
+      "name": "eorchestrator.token-path",
+      "type": "java.lang.String",
+      "sourceType": "com.example.tokencache.config.EOrchestratorProperties"
+    }
+  ],
+  "hints": []
+}

@@ -1,38 +1,19 @@
 services:
-  kc-postgres:
-    image: postgres:15
-    environment:
-      POSTGRES_DB: keycloak
-      POSTGRES_USER: keycloak
-      POSTGRES_PASSWORD: keycloak
-  keycloak:
-    image: quay.io/keycloak/keycloak:24.0.5
-    command: ["start-dev", "--import-realm"]
-    environment:
-      KC_DB: postgres
-      KC_DB_URL: jdbc:postgresql://kc-postgres:5432/keycloak
-      KC_DB_USERNAME: keycloak
-      KC_DB_PASSWORD: keycloak
-      KC_HEALTH_ENABLED: "true"
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
-    depends_on:
-      - kc-postgres
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./keycloak/realm-export:/opt/keycloak/data/import
-    healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080'"]
-      interval: 5s
-      timeout: 3s
-      retries: 30
-      start_period: 20s
-  springboot:
+  token-exchange-service-test:
+    profiles:
+      - test
     build:
-      context: ./springboot-token-cache
-    depends_on:
-      keycloak:
-        condition: service_healthy
+      context: ./token-exchange-service
+    environment:
+      SPRING_PROFILES_ACTIVE: test
+    ports:
+      - "8081:8081"
+  token-exchange-service-prod:
+    profiles:
+      - prod
+    build:
+      context: ./token-exchange-service
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
     ports:
       - "8081:8081"

@@ -1,4 +1,4 @@
-# Token Cache Service
+# Token Exchange Service
 
 ## Run
 
@@ -6,20 +6,22 @@
 docker compose up --build
 ```
 
-The Spring Boot API will be available on `http://localhost:8081` and Keycloak on `http://localhost:8080`.
+The Spring Boot API will be available on `http://localhost:8081`.
 
 ## Example Request
 
+### EOrchestrator
+
 ```
-curl -X POST http://localhost:8081/token \
+curl -X POST http://localhost:8081/eorchestrator/tokens \
   -H "Content-Type: application/json" \
-  -d '{"tenantId":"ECM","clientId":"token-cache-client","clientSecret":"token-cache-secret"}'
+  -d '{"username":"user1","password":"pass1","tenantId":"ECM"}'
 ```
 
-## Caching Behavior
+### ENM
 
-- Token URL and optional scope are resolved **only** from `application.yml` by `tenantId`.
-- Cache key: `tenantId|tokenUrl|clientId` (client secret is never stored or used in the cache key).
-- Cached token is returned when `now + skewSeconds < expiresAtEpochMillis`.
-- When the token is expired or near expiry, the service refreshes from Keycloak using a single-flight per key to avoid stampedes.
-- Failures are not cached.
+```
+curl -X POST http://localhost:8081/enm/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","password":"secret"}'
+```
