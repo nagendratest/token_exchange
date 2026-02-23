@@ -2,9 +2,9 @@ package com.example.tokencache.service;
 
 import com.example.tokencache.config.AuthCacheProperties;
 import com.example.tokencache.config.EnmProperties;
+import com.example.tokencache.cache.InMemoryCache;
 import com.example.tokencache.dto.EnmLoginRequest;
 import com.example.tokencache.exception.TokenAcquisitionException;
-import com.github.benmanes.caffeine.cache.Cache;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -28,13 +28,13 @@ public class EnmService {
 
   private final RestClient restClient;
   private final EnmProperties properties;
-  private final Cache<String, ResponseEntity<String>> cache;
+  private final InMemoryCache<String, ResponseEntity<String>> cache;
   private final AuthCacheProperties cacheProperties;
 
   public EnmService(
       RestClient.Builder builder,
       EnmProperties properties,
-      @Qualifier("enmCache") Cache<String, ResponseEntity<String>> enmCache,
+      @Qualifier("enmCache") InMemoryCache<String, ResponseEntity<String>> enmCache,
       AuthCacheProperties cacheProperties
   ) {
     this.restClient = builder.baseUrl(properties.getBaseUrl()).build();

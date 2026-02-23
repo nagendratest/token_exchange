@@ -2,9 +2,9 @@ package com.example.tokencache.service;
 
 import com.example.tokencache.config.AuthCacheProperties;
 import com.example.tokencache.config.EOrchestratorProperties;
+import com.example.tokencache.cache.InMemoryCache;
 import com.example.tokencache.dto.EOrchestratorTokenRequest;
 import com.example.tokencache.exception.TokenAcquisitionException;
-import com.github.benmanes.caffeine.cache.Cache;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -29,13 +29,13 @@ public class EOrchestratorService {
 
   private final RestClient restClient;
   private final EOrchestratorProperties properties;
-  private final Cache<String, ResponseEntity<String>> cache;
+  private final InMemoryCache<String, ResponseEntity<String>> cache;
   private final AuthCacheProperties cacheProperties;
 
   public EOrchestratorService(
       RestClient.Builder builder,
       EOrchestratorProperties properties,
-      @Qualifier("eorchestratorCache") Cache<String, ResponseEntity<String>> eorchestratorCache,
+      @Qualifier("eorchestratorCache") InMemoryCache<String, ResponseEntity<String>> eorchestratorCache,
       AuthCacheProperties cacheProperties
   ) {
     this.restClient = builder.baseUrl(properties.getBaseUrl()).build();

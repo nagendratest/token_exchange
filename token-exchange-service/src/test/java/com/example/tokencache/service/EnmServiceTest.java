@@ -2,10 +2,10 @@ package com.example.tokencache.service;
 
 import com.example.tokencache.config.EnmProperties;
 import com.example.tokencache.config.AuthCacheProperties;
+import com.example.tokencache.cache.InMemoryCache;
 import com.example.tokencache.dto.EnmLoginRequest;
 import com.example.tokencache.exception.TokenAcquisitionException;
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
+import java.time.Duration;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -35,7 +35,8 @@ class EnmServiceTest {
 
     RestClient.Builder builder = RestClient.builder();
     MockRestServiceServer server = MockRestServiceServer.bindTo(builder).build();
-    Cache<String, ResponseEntity<String>> cache = Caffeine.newBuilder().maximumSize(100).build();
+    InMemoryCache<String, ResponseEntity<String>> cache =
+        new InMemoryCache<>(100, Duration.ofSeconds(1800));
 
     server.expect(ExpectedCount.once(), requestTo("https://localhost:443/login"))
         .andExpect(method(HttpMethod.POST))
@@ -64,7 +65,8 @@ class EnmServiceTest {
 
     RestClient.Builder builder = RestClient.builder();
     MockRestServiceServer server = MockRestServiceServer.bindTo(builder).build();
-    Cache<String, ResponseEntity<String>> cache = Caffeine.newBuilder().maximumSize(100).build();
+    InMemoryCache<String, ResponseEntity<String>> cache =
+        new InMemoryCache<>(100, Duration.ofSeconds(1800));
 
     server.expect(ExpectedCount.times(2), requestTo("https://localhost:443/login"))
         .andExpect(method(HttpMethod.POST))

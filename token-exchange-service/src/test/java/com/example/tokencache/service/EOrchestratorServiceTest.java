@@ -2,11 +2,11 @@ package com.example.tokencache.service;
 
 import com.example.tokencache.config.EOrchestratorProperties;
 import com.example.tokencache.config.AuthCacheProperties;
+import com.example.tokencache.cache.InMemoryCache;
 import com.example.tokencache.dto.EOrchestratorTokenRequest;
 import com.example.tokencache.exception.TokenAcquisitionException;
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.Base64;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
@@ -38,7 +38,8 @@ class EOrchestratorServiceTest {
 
     RestClient.Builder builder = RestClient.builder();
     MockRestServiceServer server = MockRestServiceServer.bindTo(builder).build();
-    Cache<String, ResponseEntity<String>> cache = Caffeine.newBuilder().maximumSize(100).build();
+    InMemoryCache<String, ResponseEntity<String>> cache =
+        new InMemoryCache<>(100, Duration.ofSeconds(1800));
 
     String raw = "user1:pass1";
     String encoded = Base64.getEncoder()
@@ -72,7 +73,8 @@ class EOrchestratorServiceTest {
 
     RestClient.Builder builder = RestClient.builder();
     MockRestServiceServer server = MockRestServiceServer.bindTo(builder).build();
-    Cache<String, ResponseEntity<String>> cache = Caffeine.newBuilder().maximumSize(100).build();
+    InMemoryCache<String, ResponseEntity<String>> cache =
+        new InMemoryCache<>(100, Duration.ofSeconds(1800));
 
     server.expect(ExpectedCount.times(2), requestTo("https://localhost:443/ecm_service/tokens"))
         .andExpect(method(HttpMethod.POST))

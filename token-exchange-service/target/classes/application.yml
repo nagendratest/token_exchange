@@ -5,16 +5,14 @@ spring:
   application:
     name: token-exchange-service
 
-eorchestrator:
-  base-url: https://localhost:443
-  token-path: /ecm_service/tokens
-
-enm:
-  base-url: https://localhost:443
-  login-path: /login
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
 
 auth:
   cache:
     max-size: 1000
-    eorchestrator-ttl-seconds: 300
-    enm-ttl-seconds: 300
+    eorchestrator-ttl-seconds: 1800
+    enm-ttl-seconds: 1800

@@ -1,0 +1,7 @@
+eorchestrator:
+  base-url: https://localhost:443
+  path: /ecm_service/tokens
+
+enm:
+  base-url: https://localhost:443
+  path: /login

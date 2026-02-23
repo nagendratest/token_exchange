@@ -1,8 +1,7 @@
 package com.example.tokencache.config;
 
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
-import java.util.concurrent.TimeUnit;
+import com.example.tokencache.cache.InMemoryCache;
+import java.time.Duration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
@@ -11,18 +10,18 @@ import org.springframework.http.ResponseEntity;
 public class AuthCacheConfig {
 
   @Bean(name = "eorchestratorCache")
-  public Cache<String, ResponseEntity<String>> eorchestratorCache(AuthCacheProperties properties) {
-    return Caffeine.newBuilder()
-        .maximumSize(properties.getMaxSize())
-        .expireAfterWrite(properties.getEorchestratorTtlSeconds(), TimeUnit.SECONDS)
-        .build();
+  public InMemoryCache<String, ResponseEntity<String>> eorchestratorCache(AuthCacheProperties properties) {
+    return new InMemoryCache<>(
+        properties.getMaxSize(),
+        Duration.ofSeconds(properties.getEorchestratorTtlSeconds())
+    );
   }
 
   @Bean(name = "enmCache")
-  public Cache<String, ResponseEntity<String>> enmCache(AuthCacheProperties properties) {
-    return Caffeine.newBuilder()
-        .maximumSize(properties.getMaxSize())
-        .expireAfterWrite(properties.getEnmTtlSeconds(), TimeUnit.SECONDS)
-        .build();
+  public InMemoryCache<String, ResponseEntity<String>> enmCache(AuthCacheProperties properties) {
+    return new InMemoryCache<>(
+        properties.getMaxSize(),
+        Duration.ofSeconds(properties.getEnmTtlSeconds())
+    );
   }
 }
