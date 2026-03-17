@@ -1,0 +1,7 @@
+Service is internal-only via ClusterIP.
+
+In the same namespace:
+  http://{{ include "token-generator-service.fullname" . }}:{{ .Values.service.port }}
+
+Across namespaces:
+  http://{{ include "token-generator-service.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.service.port }}

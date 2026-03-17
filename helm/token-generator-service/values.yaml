@@ -1,0 +1,53 @@
+replicaCount: 2
+
+image:
+  repository: token_exchange-token-generator-service-test:latest
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+
+containerPort: 8081
+
+spring:
+  profilesActive: prod
+
+service:
+  type: ClusterIP
+  port: 8081
+
+extraEnv: []
+# extraEnv:
+#   - name: EORCHESTRATOR_BASE_URL
+#     value: "https://eorchestrator.example.com"
+#   - name: ENM_BASE_URL
+#     value: "https://enm.example.com"
+
+hostAliases: []
+# hostAliases:
+#   - ip: "127.0.0.1"
+#     hostnames:
+#       - "foo.local"
+#       - "bar.local"
+
+livenessProbe:
+  initialDelaySeconds: 20
+  periodSeconds: 10
+
+readinessProbe:
+  initialDelaySeconds: 10
+  periodSeconds: 5
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+

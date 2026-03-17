@@ -1,0 +1,14 @@
+spring:
+  profilesActive: test
+
+extraEnv:
+  - name: ENM_BASE_URL
+    value: "https://te.testmob.de"
+  - name: ENM_RESOLVE_HOST
+    value: "te.testmob.de"
+  - name: ENM_RESOLVE_PORT
+    value: "443"
+  - name: ENM_RESOLVE_ADDRESS
+    value: "10.118.123.174"
+  - name: ENM_INSECURE_TLS
+    value: "true"

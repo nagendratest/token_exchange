@@ -1,18 +1,18 @@
 services:
-  token-exchange-service-test:
+  token-generator-service-test:
     profiles:
       - test
     build:
-      context: ./token-exchange-service
+      context: ./token-generator-service
     environment:
       SPRING_PROFILES_ACTIVE: test
     ports:
       - "8081:8081"
-  token-exchange-service-prod:
+  token-generator-service-prod:
     profiles:
       - prod
     build:
-      context: ./token-exchange-service
+      context: ./token-generator-service
     environment:
       SPRING_PROFILES_ACTIVE: prod
     ports:
